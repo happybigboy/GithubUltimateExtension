@@ -30,7 +30,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'npm'
+
+      - name: Install TailwindCSS
+        if: steps.check_version.outputs.release == 'true'
+        run: npm install tailwindcss
+
+      - name: Run TailwindCSS CLI
+        if: steps.check_version.outputs.release == 'true'
+        run: npx tailwindcss -i ./src/input.css -o ./src/output.css
 
       - name: Install dependencies
         if: steps.check_version.outputs.release == 'true'
