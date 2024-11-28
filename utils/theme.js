@@ -1,24 +1,15 @@
-export function initDarkMode() {
-    const theme = localStorage.getItem('theme');
-    if (theme === 'dark') {
+export const initDarkMode = () => {
+    if (localStorage.getItem('darkMode') === 'true') {
         document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark');
     }
-}
+};
 
-export function toggleDarkMode() {
-    const html = document.documentElement;
-    if (html.classList.contains('dark')) {
-        html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-    } else {
-        html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-    }
-}
+export const toggleDarkMode = () => {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+};
 
-function enableDarkMode(withTransition = true) {
+export function enableDarkMode(withTransition = true) {
     if (!withTransition) {
         document.documentElement.classList.add('no-transition');
     }
@@ -33,7 +24,7 @@ function enableDarkMode(withTransition = true) {
     }
 }
 
-function disableDarkMode(withTransition = true) {
+export function disableDarkMode(withTransition = true) {
     if (!withTransition) {
         document.documentElement.classList.add('no-transition');
     }

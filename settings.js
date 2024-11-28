@@ -1,4 +1,4 @@
-import { checkToken} from './utils/token.js';
+import { checkToken } from './utils/token.js';
 import { saveToken, getTokens, deleteToken } from './utils/storage.js';
 import { toggleDarkMode, initDarkMode } from './utils/theme.js';
 
