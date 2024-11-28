@@ -5,3 +5,125 @@
 * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Sticky header styles */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(229, 231, 235, 1);
+    margin-bottom: 1rem;
+}
+
+.dark .sticky-header {
+    background-color: rgba(55, 65, 81, 0.95);
+    border-bottom: 1px solid rgba(75, 85, 99, 1);
+}
+
+/* Accordion styles */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-content.open {
+    max-height: 2000px; /* Large enough to show content */
+}
+
+.accordion-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.open .accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Floating Menu Styles */
+.floating-menu {
+    color: #d1d5db;
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 50;
+}
+
+.dark .floating-menu {
+    color: #d1d5db;
+}
+
+.floating-menu-items {
+    position: absolute;
+    top: 48px; /* Changed from bottom positioning */
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    visibility: hidden; /* Changed from opacity */
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+.floating-menu.active .floating-menu-items {
+    visibility: visible; /* Changed from opacity */
+    transform: translateY(0);
+}
+
+.floating-menu-item {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: white;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.dark .floating-menu-item {
+    background-color: bg-gray-800;
+    color: text-white;
+}
+
+.floating-menu-item:hover {
+    transform: scale(1.1);
+}
+
+.floating-menu-tooltip {
+    position: absolute;
+    right: 48px; /* Adjusted position */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1f2937; /* Dark gray background */
+    color: #f3f4f6; /* Light text */
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    visibility: hidden; /* Changed from opacity */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: visibility 0.2s ease;
+}
+
+.dark .floating-menu-tooltip {
+    background-color: #f3f4f6; /* Light background in dark mode */
+    color: #1f2937; /* Dark text in dark mode */
+}
+
+.floating-menu-item:hover .floating-menu-tooltip {
+    visibility: visible; /* Changed from opacity */
+}

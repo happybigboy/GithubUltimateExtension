@@ -2,230 +2,10 @@
 <html class="dark:bg-gray-800">
 <head>
     <title>GitHub Tokens</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@latest/dist/tailwind.min.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
     <script type="module" src="./app.js"></script>
-    <style>
-        /* Base transitions */
-        * {
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Light mode defaults */
-        :root {
-            color-scheme: light dark;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f3f4f6;
-            --text-primary: #111827;
-            --text-secondary: #4b5563;
-            --border-color: #e5e7eb;
-            --bg-secondary-rgb: 243, 244, 246;
-        }
-
-        /* Dark mode colors */
-        .dark {
-            --bg-primary: #121212;
-            --bg-secondary: #1e1e1e;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-            --border-color: #333333;
-            --bg-secondary-rgb: 30, 30, 30;
-        }
-
-        /* Apply variables */
-        body {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        .dark .dark\:bg-gray-700 {
-            background-color: var(--bg-secondary);
-        }
-
-        .dark .dark\:bg-gray-800 {
-            background-color: var(--bg-primary);
-        }
-
-        .dark .dark\:text-gray-200 {
-            color: var(--text-primary);
-        }
-
-        /* Table styles */
-        .dark table {
-            border-color: var(--border-color);
-        }
-
-        .dark th {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        .dark td {
-            border-color: var(--border-color);
-        }
-
-        /* Input styles */
-        .dark input, .dark select {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            border-color: var(--border-color);
-        }
-
-        /* Button styles */
-        .dark button:not(.bg-blue-500) {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border-color: var(--border-color);
-        }
-
-        /* Card styles */
-        .dark .bg-white {
-            background-color: var(--bg-secondary);
-            border-color: var(--border-color);
-        }
-
-        /* Hover states */
-        .dark tr:hover {
-            background-color: var(--bg-secondary);
-        }
-
-        .dark button:hover:not(.bg-blue-500) {
-            background-color: var(--bg-primary);
-        }
-        
-        /* Custom scrollbar for dark mode */
-        .dark ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        .dark ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-
-        .dark ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 5px;
-        }
-
-        .dark ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-secondary);
-        }
-
-        /* Sticky header styles */
-        .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 40;
-            backdrop-filter: blur(8px);
-            padding: 1rem;
-            margin: -1rem;
-            background-color: rgba(var(--bg-secondary-rgb), 0.95);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        /* Accordion styles */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .accordion-content.open {
-            max-height: 2000px; /* Large enough to show content */
-        }
-
-        .accordion-header {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.open .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Floating Menu Styles */
-        .floating-menu {
-            color: #d1d5db;
-            position: fixed;
-            top: 16px;
-            right: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            z-index: 50;
-        }
-
-        .dark .floating-menu {
-            color: #d1d5db;
-        }
-
-        .floating-menu-items {
-            position: absolute;
-            top: 48px; /* Changed from bottom positioning */
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            visibility: hidden; /* Changed from opacity */
-            transform: translateY(-10px);
-            transition: all 0.2s ease;
-        }
-
-        .floating-menu.active .floating-menu-items {
-            visibility: visible; /* Changed from opacity */
-            transform: translateY(0);
-        }
-
-        .floating-menu-item {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: white;
-            color: #374151;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .dark .floating-menu-item {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-        }
-
-        .floating-menu-item:hover {
-            transform: scale(1.1);
-        }
-
-        .floating-menu-tooltip {
-            position: absolute;
-            right: 64px;
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
-        }
-
-        .floating-menu-item:hover .floating-menu-tooltip {
-            opacity: 1;
-        }
-    </style>
 </head>
 <body class="p-6 bg-gray-100 dark:bg-gray-800 dark:text-white min-h-screen">
-    <!-- Remove the old dark mode button div -->
-    <!-- Remove the individual refresh buttons -->
-
     <!-- Repository Section -->
     <div class="w-full mt-6">
         <div class="accordion-header flex items-center justify-between p-4 bg-white dark:bg-gray-700 rounded-t-lg shadow-md" data-target="reposAccordion">
@@ -234,14 +14,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </div>
+
         <div id="reposAccordion" class="accordion-content open">
-            <div class="sticky-header">
-                <div class="mb-4 flex gap-4">
-                    <input type="text"
-                        id="repoSearch" 
-                        placeholder="Search repositories..." 
-                        class="w-full px-4 py-2 rounded-lg bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <select id="searchType" class="px-4 py-2 rounded-lg bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="sticky-header mt-2">
+                <div class="flex gap-2"></div>
+                    <input type="text" id="repoSearch" placeholder="Search..." class="w-4/5 ring-2 px-2 py-1 rounded bg-white border-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="searchType" class="px-2 py-1 rounded bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="name">Name</option>
                         <option value="language">Language</option>
                         <option value="owner">Owner</option>
@@ -406,5 +184,7 @@
             </svg>
         </button>
     </div>
+
+    
 </body>
 </html>
