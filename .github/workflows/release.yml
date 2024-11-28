@@ -61,5 +61,4 @@ jobs:
           draft: false
           prerelease: false
           files: extension-${{ steps.check_version.outputs.version }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
