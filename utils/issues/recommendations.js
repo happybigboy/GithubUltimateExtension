@@ -81,19 +81,19 @@ export async function displayRecommendedIssues(tokens, repos) {
             if (!issue.repository) return; // Skip if repository data is missing
             
             const row = document.createElement('tr');
-            row.className = 'border-b border-gray-200 hover:bg-gray-100';
+            row.className = 'border-b border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600';
             row.innerHTML = `
                 <td class="py-3 px-6 text-left">
                     <div class="flex items-center">
                         <img src="${issue.repository.owner?.avatar_url || ''}" class="w-6 h-6 rounded-full mr-2" 
                              onerror="this.src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'"/>
-                        <a href="${issue.repository.html_url}" target="_blank" class="text-blue-500 hover:underline">
+                        <a href="${issue.repository.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline">
                             ${issue.repository.full_name || 'Unknown Repository'}
                         </a>
                     </div>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <a href="${issue.html_url}" target="_blank" class="text-blue-500 hover:underline">
+                    <a href="${issue.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline">
                         ${issue.title}
                     </a>
                 </td>

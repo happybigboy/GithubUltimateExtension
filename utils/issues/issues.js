@@ -45,19 +45,19 @@ export async function displayIssues() {
         
         issues.forEach(issue => {
             const row = document.createElement('tr');
-            row.className = 'border-b border-gray-200 hover:bg-gray-100';
+            row.className = 'border-b border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600';
             const updatedAt = formatDate(issue.updated_at);
             row.innerHTML = `
                 <td class="py-3 px-6 text-left">
                     <div class="flex items-center">
                         <img src="${issue.repository.owner.avatar_url}" class="w-6 h-6 rounded-full mr-2"/>
-                        <a href="${issue.repository.html_url}" target="_blank" class="text-blue-500 hover:underline">
+                        <a href="${issue.repository.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline">
                             ${issue.repository.full_name}
                         </a>
                     </div>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <a href="${issue.html_url}" target="_blank" class="text-blue-500 hover:underline">
+                    <a href="${issue.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline">
                         ${issue.title}
                     </a>
                 </td>

@@ -84,7 +84,7 @@ async function updateStarsList() {
                                 <div class="flex items-center gap-2">
                                     <img src="${repo.owner.avatar_url}" alt="${repo.owner.login}"
                                          class="w-6 h-6 rounded-full border border-gray-200">
-                                    <a href="${repo.html_url}" target="_blank" class="text-blue-500 hover:text-blue-700">
+                                    <a href="${repo.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:text-blue-700">
                                         ${repo.full_name}
                                     </a>
                                 </div>
@@ -95,7 +95,7 @@ async function updateStarsList() {
                     }
                     ${stars.length > 3 ? `
                         <a href="https://github.com/${username}?tab=stars" target="_blank" 
-                           class="block mt-2 text-blue-500 hover:text-blue-700 text-sm">
+                           class="block mt-2 text-blue-500 dark:text-blue-200 hover:text-blue-700 text-sm">
                             View all ${stars.length} starred repositories →
                         </a>
                     ` : ''}

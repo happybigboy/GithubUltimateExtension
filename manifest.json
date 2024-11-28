@@ -4,13 +4,14 @@
   "version": "2.4.0",
   "description": "Github Ultimate Extension",
   "permissions": [
-    "storage",
+    "activeTab",
     "notifications",
-    "https://api.github.com/"
+    "storage",
+    "alarms"
   ],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js",
+    "type": "module"
   },
   "action": {
     "default_icon": {

@@ -18,7 +18,7 @@ export async function displayPullRequests() {
     
     prs.forEach(pr => {
         const row = document.createElement('tr');
-        row.className = 'border-b border-gray-200 hover:bg-gray-100';
+        row.className = 'border-b border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600';
         const createdAt = new Date(pr.created_at).toLocaleDateString();
         row.innerHTML = `
             <td class="py-3 px-6 text-left">
@@ -33,13 +33,13 @@ export async function displayPullRequests() {
                              alt="${pr.user.login}"
                              title="Pull request author: ${pr.user.login}"/>
                     </div>
-                    <a href="${pr.repository_url.replace('api.github.com/repos', 'github.com')}" target="_blank" class="text-blue-500 hover:underline">
+                    <a href="${pr.repository_url.replace('api.github.com/repos', 'github.com')}" target="_blank" class="text-blue-500 dark:text-blue-200 dark:text-blue-200 hover:underline">
                         ${pr.repository_url.split('/').slice(-2).join('/')}
                     </a>
                 </div>
             </td>
             <td class="py-3 px-6 text-left">
-                <a href="${pr.html_url}" target="_blank" class="text-blue-500 hover:underline">
+                <a href="${pr.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline">
                     ${pr.title}
                 </a>
             </td>

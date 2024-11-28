@@ -60,7 +60,7 @@ export async function displayRepos() {
             const icon = repo.codespaces ? getRandomCodespaceIcon() : null;
             const codespace_name = repo.codespaces ? extractCodespaceName(repo.codespaces) : null;
             const row = document.createElement('tr');
-            row.className = 'border-b border-gray-200 hover:bg-gray-100';
+            row.className = 'border-b border-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600';
             row.innerHTML = `
                 <td class="py-3 px-6 text-left">
                     <div class="flex items-center">
@@ -69,13 +69,13 @@ export async function displayRepos() {
                     </div>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <a href="${repo.html_url}" target="_blank" class="text-blue-500 hover:underline">
+                    <a href="${repo.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline">
                         ${repo.name} ${repo.fork ? '🔱' : ''} 🔗
                     </a>
                     ${repo.fork && repo.parent && repo.parent.owner ? `
                         <div class="text-xs text-gray-500 flex items-center mt-1">
                             <img src="${repo.parent.owner.avatar_url}" class="w-4 h-4 rounded-full mr-1" alt="${repo.parent.owner.login}"/>
-                            Forked from: <a href="${repo.parent.html_url}" target="_blank" class="text-blue-500 hover:underline ml-1">${repo.parent.full_name}</a>
+                            Forked from: <a href="${repo.parent.html_url}" target="_blank" class="text-blue-500 dark:text-blue-200 hover:underline ml-1">${repo.parent.full_name}</a>
                         </div>
                     ` : ''}
                 </td>
