@@ -1,16 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Github Ultimate Extension",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Github Ultimate Extension",
   "permissions": [
-    "activeTab",
+    "storage",
     "notifications",
-    "storage"
+    "https://api.github.com/"
   ],
   "background": {
-    "service_worker": "background.js",
-    "type": "module"
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "action": {
     "default_icon": {
