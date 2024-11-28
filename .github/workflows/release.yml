@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
   upload-release-asset:
@@ -11,34 +12,53 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Get commit message
+        id: get_commit_message
+        run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+
+      - name: Check if commit message contains version
+        id: check_version
+        run: |
+          if [[ "${{ steps.get_commit_message.outputs.message }}" =~ V[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+            echo "::set-output name=release::true"
+          else
+            echo "::set-output name=release::false"
+          fi
+
       - name: Setup Node.js
+        if: steps.check_version.outputs.release == 'true'
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.check_version.outputs.release == 'true'
         run: npm ci
 
       - name: Build extension
+        if: steps.check_version.outputs.release == 'true'
         run: npm run build
 
       - name: Package extension
+        if: steps.check_version.outputs.release == 'true'
         run: |
-          zip -r extension-v${{ github.event.release.tag_name }}.zip dist/* manifest.json
+          zip -r extension-v${{ github.event.head_commit.message }}.zip dist/* manifest.json
 
       - name: Upload Release Asset
+        if: steps.check_version.outputs.release == 'true'
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./extension-v${{ github.event.release.tag_name }}.zip
-          asset_name: extension-v${{ github.event.release.tag_name }}.zip
+          asset_path: ./extension-v${{ github.event.head_commit.message }}.zip
+          asset_name: extension-v${{ github.event.head_commit.message }}.zip
           asset_content_type: application/zip
         if: success()
 
       - name: Update Release Description
+        if: steps.check_version.outputs.release == 'true'
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.PAT_TOKEN }}
@@ -49,7 +69,7 @@ jobs:
             ${{ github.event.release.body }}
             
             ### Installation
-            1. Download the extension-v${{ github.event.release.tag_name }}.zip file
+            1. Download the extension-v${{ github.event.head_commit.message }}.zip file
             2. Unzip the file
             3. Go to chrome://extensions/
             4. Enable Developer Mode
