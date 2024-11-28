@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Github Ultimate Extension",
+  "version": "2.0",
+  "description": "Github Ultimate Extension",
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "host_permissions": [
+    "https://api.github.com/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["index.html", "settings.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
