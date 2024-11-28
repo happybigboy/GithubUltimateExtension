@@ -55,7 +55,6 @@ jobs:
           asset_path: ./extension-v${{ github.event.head_commit.message }}.zip
           asset_name: extension-v${{ github.event.head_commit.message }}.zip
           asset_content_type: application/zip
-        if: success()
 
       - name: Update Release Description
         if: steps.check_version.outputs.release == 'true'
