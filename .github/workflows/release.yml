@@ -1,38 +1,56 @@
-name: Create Release
+name: Release
 
 on:
-  push:
-    tags:
-      - 'v*.*'  # Matches tags like v2.1, v2.2, v2.3, etc.
+  release:
+    types: [published]
 
 jobs:
-  release:
+  upload-release-asset:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Create zip file
-        run: zip -r extension.zip .
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: false
+          node-version: '16'
+          cache: 'npm'
 
-      - name: Upload release asset
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Package extension
+        run: |
+          zip -r extension-v${{ github.event.release.tag_name }}.zip dist/* manifest.json
+
+      - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./extension.zip
-          asset_name: extension.zip
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./extension-v${{ github.event.release.tag_name }}.zip
+          asset_name: extension-v${{ github.event.release.tag_name }}.zip
           asset_content_type: application/zip
+        if: success()
+
+      - name: Update Release Description
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          tag_name: ${{ github.event.release.tag_name }}
+          body: |
+            ## Chrome Extension v${{ github.event.release.tag_name }}
+            
+            ${{ github.event.release.body }}
+            
+            ### Installation
+            1. Download the extension-v${{ github.event.release.tag_name }}.zip file
+            2. Unzip the file
+            3. Go to chrome://extensions/
+            4. Enable Developer Mode
+            5. Click "Load unpacked" and select the unzipped folder
